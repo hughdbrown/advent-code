@@ -14,7 +14,8 @@ CHANGES = {
 
 def domove(pos, move, c):
     """
-    Perform a move in a direction, update position and count of times at that position
+    Perform a move in a direction,.
+    Update position and count of times at that position.
     """
     change = CHANGES[move]
     pos = (pos[0] + change[0], pos[1] + change[1])
