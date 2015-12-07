@@ -402,19 +402,15 @@ def resolve_type(d, arg):
 
 def fn(d, op, args):
     if op == '->':
-        arg = args[0]
-        if re.match(r'\d+', arg):
-            return int(arg)
-        else:
-            return resolve_type(d, arg)
+        return resolve_type(d, args[0])
     elif op == 'OR':
         return resolve_type(d, args[0]) | resolve_type(d, args[1])
     elif op == 'AND':
         return resolve_type(d, args[0]) & resolve_type(d, args[1])
     elif op == 'LSHIFT':
-        return resolve_type(d, args[0]) << int(args[1])  # resolve_type(d, args[1])
+        return resolve_type(d, args[0]) << resolve_type(d, args[1])
     elif op == 'RSHIFT':
-        return resolve_type(d, args[0]) >> int(args[1])  # resolve_type(d, args[1])
+        return resolve_type(d, args[0]) >> resolve_type(d, args[1])
     elif op == 'NOT':
         return ~ resolve_type(d, args[0])
 
