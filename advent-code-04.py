@@ -6,17 +6,20 @@ from hashlib import md5
 
 KEY = "yzbqklnj"
 
+def search(r, prefix):
+    for i in r:
+        if md5("{0}{1}".format(KEY, i)).hexdigest().startswith(prefix):
+            return i
+
+
 def main1():
     # 282749
-    for i in range(1000 * 1000):
-        if md5("{0}{1}".format(KEY, i)).hexdigest().startswith("00000"):
-            return i
+    return search(range(1000 * 1000), "00000")
+
 
 def main2():
     # 9962624
-    for i in range(1000 * 1000 * 100):
-        if md5("{0}{1}".format(KEY, i)).hexdigest().startswith("000000"):
-            return i
+    return search(range(1000 * 1000 * 100), "000000")
 
 
 if __name__ == '__main__':
