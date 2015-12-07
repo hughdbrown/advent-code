@@ -1008,7 +1008,6 @@ def create_dims():
     ]
 
 def wrapping_paper(dims):
-    # print(sum(3*dim[0]*dim[1] + 2*dim[0]*dim[2] + 2 *dim[1]*dim[2] for dim in dims))
     print(sum(3*dim[0]*dim[1] + 2*dim[2] * (dim[0] + dim[1]) for dim in dims))
 
 def ribbon(dims):
