@@ -17,12 +17,10 @@ def looksay(number):
     """
     result = []
     for d in number:
-        if not result:
+        if not result or d != result[-1][1]:
             result.append([1, d])
-        elif d == result[-1][1]:
-            result[-1] = [result[-1][0] + 1, d]
         else:
-            result.append([1, d])
+            result[-1][0] += 1
     return "".join("{0}{1}".format(*r) for r in result)
 
 def test1():
