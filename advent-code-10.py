@@ -23,22 +23,17 @@ def looksay(number):
             result[-1][0] += 1
     return "".join("{0}{1}".format(*r) for r in result)
 
-def test1():
-    number = str(1113122113)
-    for _ in range(40):
-        number = looksay(number)
-    print(len(number))  
 
-
-def test2():
-    number = str(1113122113)
-    for _ in range(50):
+def test1(number, iterations):
+    for _ in range(iterations):
         number = looksay(number)
-    print(len(number))    
+    return number
 
 
 if __name__ == '__main__':
     from doctest import testmod
     testmod()
-    test1()
-    test2()
+    result = test1("1113122113", 40)
+    print(len(result))
+    result = test1(result, 10)
+    print(len(result))
