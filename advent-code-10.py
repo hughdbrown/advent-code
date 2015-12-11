@@ -25,9 +25,10 @@ def looksay(number):
 
 
 def test1(number, iterations):
-    for _ in range(iterations):
-        number = looksay(number)
-    return number
+    return number if not iterations else test1(looksay(number), iterations - 1)
+    # for _ in range(iterations):
+    #     number = looksay(number)
+    #return number
 
 
 if __name__ == '__main__':
