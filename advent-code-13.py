@@ -45,26 +45,20 @@ def pos_score(d, pos, c):
 
 def precalc_pos(names):
     count = len(names)
-    return [((i + count - 1) % count, (i + 1) % count) for i in range(len(names))]
+    return [((i + count - 1) % count, (i + 1) % count) for i in range(count)]
 
 
-def main1(d):
+def main(d):
     names = set(d)
     pos = precalc_pos(names)
     return max(pos_score(d, pos, c) for c in permutations(names, len(names)))
 
 
-def main2(d):
+if __name__ == '__main__':
+    d = load_data()
+    print(main(d))
     dd = d.copy()
     for name in dd.keys():
         dd[name]['Hugh'] = 0
         dd['Hugh'][name] = 0
-    names = set(dd)
-    pos = precalc_pos(names)
-    return max(pos_score(dd, pos, c) for c in permutations(names, len(names)))
-
-
-if __name__ == '__main__':
-    d = load_data()
-    print(main1(d))
-    print(main2(d))
+    print(main(dd))
