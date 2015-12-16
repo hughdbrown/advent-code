@@ -1,18 +1,14 @@
 #!/usr/bin/env python
 from __future__ import print_function
 
-from collections import Counter, defaultdict
-from string import lowercase
-from hashlib import md5
+from collections import defaultdict
 import re
 import os.path
-from itertools import permutations, combinations
-import types
+from itertools import permutations
 from pprint import pprint
 
 import simplejson
 
-import numpy as np
 
 def process(line):
     words = line.split()
@@ -22,14 +18,13 @@ def process(line):
         (1 if 'gain' in words else -1) * int(re.match(r'''.*?(?P<num>\d+)''', line).groupdict()['num'])
     )
 
+
 def load_data():
     with open("data/advent-13.txt") as f:
         data = [process(line.rstrip()) for line in f]
         d = defaultdict(dict)
         for k, v, n in data:
             d[k].update({v: n})
-        # for k, v in d.items():
-        #     print(k, v)
     return d
 
 
