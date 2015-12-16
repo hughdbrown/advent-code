@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 from __future__ import print_function
 
-from collections import Counter, defaultdict
 import re
-from operator import itemgetter, attrgetter, le, ge, eq
+from operator import le, ge, eq
 
 
 import simplejson
