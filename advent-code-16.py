@@ -4,12 +4,7 @@ from __future__ import print_function
 from collections import Counter, defaultdict
 import re
 from operator import itemgetter, attrgetter, le, ge, eq
-import types
-from itertools import chain, combinations, permutations
-import os.path
-from pprint import pprint
-from string import lowercase
-from hashlib import md5
+
 
 import simplejson
 
@@ -44,9 +39,9 @@ def main2(d):
         'goldfish': ge,
     }
     for sk, sv in d.items():
-        if sum(
-            int(op.get(k, eq)(answer[k], v))
-            for k, v in sv.items()) == 3:
+        if all(
+            op.get(k, eq)(answer[k], v)
+            for k, v in sv.items()):
             return sk
 
 
