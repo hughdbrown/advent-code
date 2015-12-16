@@ -3,7 +3,6 @@ from __future__ import print_function
 
 from operator import le, ge, eq
 
-
 import simplejson
 
 answer = {
@@ -23,19 +22,8 @@ def load_data():
     with open("data/advent-16.txt") as f:
         return simplejson.loads(f.read())
 
-def main(d):
-    for sk, sv in d.items():
-        if all(answer[k] == v for k, v in sv.items()):
-            return sk
 
-
-def main2(d):
-    op = {
-        'cats': le,
-        'trees': le,
-        'pomeranians': ge,
-        'goldfish': ge,
-    }
+def main(d, op):
     for sk, sv in d.items():
         if all(
             op.get(k, eq)(answer[k], v)
@@ -43,8 +31,14 @@ def main2(d):
             return sk
 
 
-
 if __name__ == '__main__':
     d = load_data()
-    print(main(d))
-    print(main2(d))
+    print(main(d, {}))
+    op = {
+        'cats': le,
+        'trees': le,
+        'pomeranians': ge,
+        'goldfish': ge,
+    }
+
+    print(main(d, op))
