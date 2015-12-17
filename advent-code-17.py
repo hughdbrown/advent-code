@@ -2,6 +2,9 @@
 from __future__ import print_function
 
 
+from itertools import takewhile
+
+
 def load_data():
     return sorted([
         11,
@@ -43,9 +46,8 @@ def main(d):
 
 def main2(d):
     size = 150
-    x = list(fit(d, size))
-    y = len(min(x, key=len))
-    return sum(len(xx) == y for xx in x)
+    x = sorted(fit(d, size), key=len)
+    return len(list(takewhile(lambda xx: len(xx) == len(x[0]), x)))
 
 
 if __name__ == '__main__':
