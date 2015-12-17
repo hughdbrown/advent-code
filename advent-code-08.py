@@ -30,7 +30,7 @@ def slen(s):
     return len(result)
 
 def tlen(s):
-    print(s)
+    #print(s)
     result = []
     i = 0
     while i < len(s):
@@ -45,7 +45,7 @@ def tlen(s):
                 result += ['\\', s[i + 1]]
                 i += 2
             else:
-                print(s[i + 1])
+                # print(s[i + 1])
                 assert False
         elif c in ('"', "'"):
             result += ["\\", c]
@@ -53,7 +53,7 @@ def tlen(s):
         else:
             result.append(c)
             i += 1
-    print(result)
+    # print(result)
     return len(result) + 2
 
 
@@ -65,7 +65,7 @@ def main1():
     return sum(len(x) for x in memory) - sum(slen(x) for x in memory)
 
 def main2():
-    filename = "advent-data-08.txt"
+    filename = "data/advent-data-08.txt"
     filelen = os.path.getsize(filename)
     with open(filename, "rb") as f:
         memory = [line for line in f]
