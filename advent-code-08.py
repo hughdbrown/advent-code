@@ -58,7 +58,7 @@ def tlen(s):
 
 
 def main1():
-    filename = "advent-data-08.txt"
+    filename = "data/advent-data-08.txt"
     filelen = os.path.getsize(filename)
     with open(filename, "rb") as f:
         memory = [line for line in f]
