@@ -39,18 +39,16 @@ def fit(d, size):
                 yield [item] + x
 
 
-def main(d):
-    size = 150
+def main(d, size):
     return len(list(fit(d, size)))
 
 
-def main2(d):
-    size = 150
+def main2(d, size):
     x = sorted(fit(d, size), key=len)
     return len(list(takewhile(lambda xx: len(xx) == len(x[0]), x)))
 
 
 if __name__ == '__main__':
     d = load_data()
-    print(main(d))
-    print(main2(d))
+    print(main(d, 150))
+    print(main2(d, 150))
