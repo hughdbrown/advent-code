@@ -32,23 +32,25 @@ def load_data():
 
 def fit(d, size):
     for i, item in enumerate(d):
+        ilist = [item]
         if item == size:
-            yield [item]
+            yield ilist
         elif item < size:
             for x in fit(d[i + 1:], size - item):
-                yield [item] + x
+                yield ilist + x
 
 
-def main(d, size):
-    return len(list(fit(d, size)))
+def main(fits):
+    return len(fits)
 
 
-def main2(d, size):
-    x = sorted(fit(d, size), key=len)
+def main2(fits):
+    x = sorted(fits, key=len)
     return len(list(takewhile(lambda xx: len(xx) == len(x[0]), x)))
 
 
 if __name__ == '__main__':
     d = load_data()
-    print(main(d, 150))
-    print(main2(d, 150))
+    fits = list(fit(d, 150))
+    print(main(fits))
+    print(main2(fits))
