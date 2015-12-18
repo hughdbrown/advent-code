@@ -31,6 +31,9 @@ def load_data():
 
 
 def fit(d, size):
+    """
+    Generator to produce all solutions (given containers in `d` and `size`
+    """
     for i, item in enumerate(d):
         ilist = [item]
         if item == size:
@@ -41,11 +44,19 @@ def fit(d, size):
 
 
 def main(fits):
+    """
+    Find how many ways there are to fit into the containers
+    """
     return len(fits)
 
 
 def main2(fits):
+    """
+    Find how many combinations that fit in the containers use the smallest number of contaienrs
+    """
+    # Sort the fitting solutions by length
     x = sorted(fits, key=len)
+    # Make a list of the smallest fitting solutions, return the count of such solutions
     return len(list(takewhile(lambda xx: len(xx) == len(x[0]), x)))
 
 
