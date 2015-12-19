@@ -12,9 +12,9 @@ def chemsplit(ed, v):
     lookup = defaultdict(list)
     for k in ed:
         lookup[k[0]].append(k)
+    lookup = {k: sorted(v, key=len, reverse=True) for k, v in lookup.items()}
     while i < len(v):
-        c = v[i]
-        for k in sorted(lookup[c], key=len, reverse=True):
+        for k in lookup[v[i]]:
             if v[i:].startswith(k):
                 i += len(k)
                 result.append(ed[k])

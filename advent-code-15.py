@@ -64,6 +64,9 @@ def main(d):
 
 
 def main2(d):
+    """
+    Restrict solutions to those with 500 calories
+    """
     s = 0
     for i, j, k, l in counter_iter():
         o = outcome(d, i, j, k, l)
