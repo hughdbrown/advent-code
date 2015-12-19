@@ -114,15 +114,15 @@ def main2(src, d, target):
     while target != src:
         print('-' * 30)
         possible = set(target)
-        keyorder = sorted([k for k in reverse_dict if k[0] in possible], key=len, reverse=True)
+        keyorder = sorted([k for k in reverse_dict if set(k).issubset(possible)], key=len, reverse=True)
         for k in keyorder:
             v = reverse_dict[k]
-            print("Trying key {0}".format(k))
+            print("{1}: Trying key {0}".format(k, target))
             for index in list(reversed(search(target, k))):
                 left, right = target[:index], target[index + len(k):]
                 target = left + [v] + right
                 subs += 1
-                print(k, len(target))
+                print("{0} -> {1}".format(k, target))
     return subs
 
 
