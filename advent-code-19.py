@@ -80,49 +80,52 @@ def load_data():
 
 
 def search(src, target):
-    results = []
-    src = list(src)
-    target = list(target)
-    s = len(src)
+    src, target = list(src), list(target)
     t = len(target)
-    for i in range(0, s - t + 1):
-        if src[i:i + t] == target:
-            results.append(i)
-    return results
+    t0 = target[0]
+    possible = [i for i, s0 in enumerate(src) if s0 == t0]
+    return [i
+        for i in reversed(possible)
+        if src[i:i + t] == target
+    ]
 
 
 def main(d, equation):
-    s = set()
-    for k, v in d.items():
-        # Find all the indexes that k matches equation at
-        for index in search(equation, [k]):
-            # Do all possible substitutions at matching indexes
-            assert equation[index] == k
-            left, right = equation[:index], equation[index + 1:]
-            s.update([tuple(left + vv + right) for vv in v])
-    return len(s)
+    segment_iter = (
+        (equation[:index], equation[index + 1:], v)
+        for k, v in d.items()
+        for index in search(equation, [k])
+    )
+    return len(set(
+        tuple(left + vv + right)
+        for left, right, v in segment_iter
+        for vv in v
+    ))
 
 
 def main2(src, d, target):
     reverse_dict = {
-        tuple(vv): k
+        tuple(vv): [k]
         for k, v in d.items()
         for vv in v
     }
+    sorted_keys = sorted(reverse_dict, key=len, reverse=True)
     # pprint(reverse_dict)
     subs = 0
     while target != src:
-        print('-' * 30)
+        # print('-' * 30)
         possible = set(target)
-        keyorder = sorted([k for k in reverse_dict if set(k).issubset(possible)], key=len, reverse=True)
+        keyorder = (k for k in sorted_keys if set(k).issubset(possible))
         for k in keyorder:
-            v = reverse_dict[k]
-            print("{1}: Trying key {0}".format(k, target))
-            for index in list(reversed(search(target, k))):
-                left, right = target[:index], target[index + len(k):]
-                target = left + [v] + right
-                subs += 1
-                print("{0} -> {1}".format(k, target))
+            klen = len(k)
+            vlist = reverse_dict[k]
+            # print("{1}: Trying key {0}".format(k, target))
+            index_matches = list(search(target, k))
+            for index in index_matches:
+                left, right = target[:index], target[index + klen:]
+                target = left + vlist + right
+                # print("{0} -> {1}".format(k, target))
+            subs += len(index_matches)
     return subs
 
 
